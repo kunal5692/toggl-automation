@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 """
 Python script to automatically get the changes in the git directory.
@@ -9,7 +9,6 @@ Email : kunal.chavhan005@gmail.com
 import subprocess
 import os
 import sys
-
 path=""
 cwd=""
 
@@ -36,7 +35,7 @@ def gitCommands(command):
 	os.chdir(cwd)
 	fobj = open("gitChanges.txt","w")
 	for i in output:
- 		fobj.write(i)
+		fobj.write(i)
 	fobj.close()
 	result = readGitChanges()
 	os.chdir(path)
@@ -51,7 +50,7 @@ def readGitChanges():
 	os.chdir(path)
 	return result
 
-def main():
+def begin():
 	global path
 	path = raw_input("Please enter patht to your working git directory: ")
 	global cwd
@@ -63,8 +62,3 @@ def main():
 	command = "git diff --name-only " + head
 	result = gitCommands(command)
 	print result
-	#branch = getBranchName(result)
-	#print("your workiong branch is: ",branch)
-
-if __name__ == '__main__':
-	main()
