@@ -50,6 +50,11 @@ def readGitChanges():
 	os.chdir(path)
 	return result
 
+def get_fileName(filepath):
+	file = os.path.basename(filepath)
+	filename = os.path.splitext(file)[0]
+	return filename
+
 def begin():
 	global path
 	path = raw_input("Please enter patht to your working git directory: ")
@@ -59,6 +64,9 @@ def begin():
 	print "You are on branch: ",branch
 	head = gitLog()
 	print "the commit head is at: ",head
-	command = "git diff --name-only " + head
+	command = "git show --pretty="+"format:"+" --name-only " + head
 	result = gitCommands(command)
-	print result
+	description=[]
+	for desc in result:
+		description.append(get_fileName(desc))
+	print description
